@@ -1,0 +1,170 @@
+attrs:
+  add_number_cmd:
+    module_path: app.commands.calc
+    class_name: AddNumber
+  subtract_number_cmd:
+    module_path: app.commands.calc
+    class_name: SubtractNumber
+  multiply_number_cmd:
+    module_path: app.commands.calc
+    class_name: MultiplyNumber
+  divide_number_cmd:
+    module_path: app.commands.calc
+    class_name: DivideNumber
+  exponentiate_number_cmd:
+    module_path: app.commands.calc
+    class_name: ExponentiateNumber
+  validate_number_cmd:
+    module_path: app.commands.valid
+    class_name: ValidateNumber
+features:
+  calc.add:
+    name: 'Add Number'
+    description: 'Adds one number to another'
+    commands:
+      - attribute_id: validate_number_cmd
+        name: Validate `a` input
+        data_key: a
+        params:
+          value: $r.a
+      - attribute_id: validate_number_cmd
+        name: Validate `b` input
+        data_key: b
+        params:
+          value: $r.b
+      - attribute_id: add_number_cmd
+        name: Add `a` and `b`
+  calc.subtract:
+    name: 'Subtract Number'
+    description: 'Subtracts one number from another'
+    commands:
+      - attribute_id: validate_number_cmd
+        name: Validate `a` input
+        data_key: a
+        params:
+          value: $r.a
+      - attribute_id: validate_number_cmd
+        name: Validate `b` input
+        data_key: b
+        params:
+          value: $r.b
+      - attribute_id: subtract_number_cmd
+        name: Subtract `b` from `a`
+  calc.multiply:
+    name: 'Multiply Number'
+    description: 'Multiplies one number by another'
+    commands:
+      - attribute_id: validate_number_cmd
+        name: Validate `a` input
+        data_key: a
+        params:
+          value: $r.a
+      - attribute_id: validate_number_cmd
+        name: Validate `b` input
+        data_key: b
+        params:
+          value: $r.b
+      - attribute_id: multiply_number_cmd
+        name: Multiply `a` and `b`
+  calc.divide:
+    name: 'Divide Number'
+    description: 'Divides one number by another'
+    commands:
+      - attribute_id: validate_number_cmd
+        name: Validate `a` input
+        data_key: a
+        params:
+          value: $r.a
+      - attribute_id: validate_number_cmd
+        name: Validate `b` input
+        data_key: b
+        params:
+          value: $r.b
+      - attribute_id: divide_number_cmd
+        name: Divide `a` by `b`
+  calc.exp:
+    name: 'Exponentiate Number'
+    description: 'Raises one number to the power of another'
+    commands:
+      - attribute_id: validate_number_cmd
+        name: Validate `a` input
+        data_key: a
+        params:
+          value: $r.a
+      - attribute_id: validate_number_cmd
+        name: Validate `b` input
+        data_key: b
+        params:
+          value: $r.b
+      - attribute_id: exponentiate_number_cmd
+        name: Raise `a` to the power of `b`
+  calc.sqrt:
+    name: 'Square Root'
+    description: 'Calculates the square root of a number'
+    commands:
+      - attribute_id: validate_number_cmd
+        name: Validate `a` input
+        data_key: a
+        params:
+          value: $r.a
+      - attribute_id: validate_number_cmd
+        name: Convert `b` to number
+        data_key: b
+        params:
+          value: '0.5'
+      - attribute_id: exponentiate_number_cmd
+        name: Calculate square root of `a`
+errors:
+  invalid_input:
+    name: Invalid Numeric Input
+    message:
+      - lang: en_US
+        text: 'Value {} must be a number'
+      - lang: es_ES
+        text: 'El valor {} debe ser un número'
+  division_by_zero:
+    name: Division By Zero
+    message:
+      - lang: en_US
+        text: 'Cannot divide by zero'
+      - lang: es_ES
+        text: 'No se puede dividir por cero'
+
+interfaces:
+  basic_calc:
+    name: Basic Calculator
+    description: Perform basic calculator operations
+    module_path: tiferet.contexts.app
+    class_name: AppInterfaceContext
+    attrs:
+      container_repo:
+        class_name: ContainerYamlProxy
+        module_path: tiferet.proxies.yaml.container
+      feature_repo:
+        class_name: FeatureYamlProxy
+        module_path: tiferet.proxies.yaml.feature
+      error_repo:
+        class_name: ErrorYamlProxy
+        module_path: tiferet.proxies.yaml.error
+      feature_service:
+        class_name: FeatureHandler
+        module_path: tiferet.handlers.feature
+      container_service:
+        class_name: ContainerHandler
+        module_path: tiferet.handlers.container
+      error_service:
+        class_name: ErrorHandler
+        module_path: tiferet.handlers.error
+      container:
+        class_name: ContainerContext
+        module_path: tiferet.contexts.container
+      features:
+        class_name: FeatureContext
+        module_path: tiferet.contexts.feature
+      errors:
+        class_name: ErrorContext
+        module_path: tiferet.contexts.error
+    const:
+      container_config_file: 'app/configs/config.yml'
+      feature_config_file: 'app/configs/config.yml'
+      error_config_file: 'app/configs/config.yml'
