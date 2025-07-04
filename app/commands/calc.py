@@ -96,7 +96,7 @@ class DivideNumber(Command):
         :rtype: Number
         '''
         # Check if b is zero to avoid division by zero.
-        self.verify(b.format() != 0, 'DIVISION_BY_ZERO')
+        self.verify(b.format() != 0, 'DIVISION_BY_ZERO', 'Cannot divide by zero.')
 
         # Divide the formatted values of a by b.
         result = a.format() / b.format()
