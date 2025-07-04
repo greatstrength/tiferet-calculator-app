@@ -68,6 +68,20 @@ division = app.run(
 print(f'{a} / {b} = {division}')
 
 
+# Trigger an error by dividing by zero.
+a = 8
+b = 0
+divide_by_zero = app.run(
+    'basic_calc',
+    'calc.divide',
+    data=dict(
+        a=a,
+        b=b,
+    ),
+)
+
+print(f'Returned error: {divide_by_zero}')
+
 # Execute the exponentiate feature to raise a to the power of b.
 a = 2
 b = 3
